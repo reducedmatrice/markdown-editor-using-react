@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Markdown editor Using React （Document）
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+这个在线markdown editor可以为用户提供**实时**的markdown to Text **渲染**。用户在左面的markdown textfield输入md内容，相应的Text会在右边的textfield同步显示出来。
 
-In the project directory, you can run:
+主要涉及了
 
-### `npm start`
+- react project的部署
+- html 和css的用法
+- 利用`{useState} from "react"`在组件之间传递参数
+- 文本框的使用
+- `*ReactMarkdown* from "react-markdown"`的使用
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img src="D:./intro.png" style="zoom:50%;" />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 项目结构
 
-### `npm test`
+MY-MARKDOWN-EDITOR\SRC
+│  App.css
+│  App.js
+│  App.test.js
+│  editorContext.js
+│  index.css
+│  index.js
+│  reportWebVitals.js
+│  setupTests.js
+│  
+└─components
+        markedInput.jsx
+        result.jsx
+        component.css
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- App.js 是 root component，是application的主容器
+- editorContext.js
+- components里面的两个jsx 负责两个文本框的功能
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 依赖
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+"marked": "^5.0.4",
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"react-scripts": "5.0.1",
+"react-markdown": "^8.0.7",
+"styled-components": "5.3.11",
+"web-vitals": "^2.1.4"
+```
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## App.js
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+在App() 里面定义了一个`useState()`的hook 函数
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`const contextValue` 是一个对象，保存了 `markdownText` 和 `setMarkdownText` 的值。这个对象可以使用 React 的 Context API 将这些值传递给其他组件。
 
-## Learn More
+ `markdownText` 将存储 Markdown 文本的内容，而 `setMarkdownText` 将用于更新这个内容。通过使用 `useState` 钩子，可以实现**实时渲染**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### markedInput.jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+把markdown text利用一个`onInputChange` 函数放到` {setMarkdownText}` 里面，这样别的组件就可以访问了
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## result.jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+获取`markdownText`。 在html里面利用 `ReactMarkdown`标签把`markdownText`变成plain text
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### App.css
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+app.js 样式
 
-### `npm run build` fails to minify
+### component.css
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+两个.jsx 样式
