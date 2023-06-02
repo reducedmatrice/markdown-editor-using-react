@@ -12,7 +12,7 @@
 - 文本框的使用
 - `*ReactMarkdown* from "react-markdown"`的使用
 
-<img src="D:./intro.png" style="zoom:50%;" />
+<img src="./intro.png" style="zoom:50%;" />
 
 ## 项目结构
 
